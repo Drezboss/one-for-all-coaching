@@ -11,7 +11,7 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  root: path.resolve(__dirname, "client"),
+  // root: path.resolve(__dirname, "client"), // <-- REMOVE or COMMENT OUT this line
   build: {
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
