@@ -6,7 +6,7 @@ import {
   Scissors, 
   Droplets, 
   Home, 
-  Vacuum, 
+  Zap, 
   CheckCircle, 
   Clock, 
   DollarSign,
@@ -49,7 +49,7 @@ const ServicesPage: React.FC = () => {
       description: 'Thorough, detailed cleaning including areas often missed in regular cleaning.'
     },
     {
-      icon: <Vacuum className="h-6 w-6" />,
+      icon: <Zap className="h-6 w-6" />,
       name: 'Move-in/Move-out',
       description: 'Complete cleaning for property transitions, ensuring everything is spotless.'
     },

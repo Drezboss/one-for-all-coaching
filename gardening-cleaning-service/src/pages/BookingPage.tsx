@@ -1,43 +1,30 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { 
   Calendar, 
-  Clock, 
   CheckCircle, 
   AlertCircle, 
-  User, 
-  Phone, 
-  Mail, 
-  MapPin,
   Leaf,
-  Sparkles,
-  DollarSign,
-  Info
+  Sparkles
 } from 'lucide-react';
 
-// Validation schema
-const schema = yup.object({
-  name: yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
-  email: yup.string().required('Email is required').email('Please enter a valid email'),
-  phone: yup.string().required('Phone number is required').matches(/^[\d\s\-\+\(\)]+$/, 'Please enter a valid phone number'),
-  address: yup.string().required('Service address is required'),
-  service: yup.string().required('Please select a service'),
-  timeSlot: yup.string().required('Please select a time slot'),
-  frequency: yup.string().required('Please select service frequency'),
-  specialRequests: yup.string()
-});
-
-type FormData = yup.InferType<typeof schema>;
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  service: string;
+  timeSlot: string;
+  frequency: string;
+  specialRequests?: string;
+}
 
 const BookingPage: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
 
   const {
     register,
@@ -45,9 +32,7 @@ const BookingPage: React.FC = () => {
     formState: { errors },
     reset,
     watch
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  });
+  } = useForm<FormData>();
 
   const watchedService = watch('service');
 
@@ -147,7 +132,6 @@ const BookingPage: React.FC = () => {
     setIsSubmitting(false);
     reset();
     setSelectedDate(null);
-    setSelectedService('');
     
     // Reset success message after 5 seconds
     setTimeout(() => {
@@ -376,13 +360,13 @@ const BookingPage: React.FC = () => {
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                     Full Name *
                   </label>
-                  <input
-                    type="text"
-                    id="name"
-                    {...register('name')}
-                    className={`input-field ${errors.name ? 'border-red-500' : ''}`}
-                    placeholder="Enter your full name"
-                  />
+                                      <input
+                      type="text"
+                      id="name"
+                      {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Name must be at least 2 characters' } })}
+                      className={`input-field ${errors.name ? 'border-red-500' : ''}`}
+                      placeholder="Enter your full name"
+                    />
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600 flex items-center">
                       <AlertCircle className="h-4 w-4 mr-1" />
@@ -513,11 +497,11 @@ const BookingPage: React.FC = () => {
                       <span className="text-gray-900">Total:</span>
                       <span className="text-primary-600">${calculateTotal()}</span>
                     </div>
-                    {watch('frequency') && frequencyOptions.find(opt => opt.value === watch('frequency'))?.discount > 0 && (
-                      <p className="text-sm text-green-600 text-right">
-                        You save ${getSelectedServiceDetails()?.price! - calculateTotal()} with {frequencyOptions.find(opt => opt.value === watch('frequency'))?.label.toLowerCase()} service!
-                      </p>
-                    )}
+                                         {watch('frequency') && frequencyOptions.find(opt => opt.value === watch('frequency'))?.discount && frequencyOptions.find(opt => opt.value === watch('frequency'))!.discount > 0 && (
+                       <p className="text-sm text-green-600 text-right">
+                         You save ${getSelectedServiceDetails()?.price! - calculateTotal()} with {frequencyOptions.find(opt => opt.value === watch('frequency'))?.label.toLowerCase()} service!
+                       </p>
+                     )}
                   </div>
                 </div>
               </div>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { 
   Phone, 
   Mail, 
@@ -15,18 +13,15 @@ import {
   Calendar
 } from 'lucide-react';
 
-// Validation schema
-const schema = yup.object({
-  name: yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
-  email: yup.string().required('Email is required').email('Please enter a valid email'),
-  phone: yup.string().required('Phone number is required').matches(/^[\d\s\-\+\(\)]+$/, 'Please enter a valid phone number'),
-  service: yup.string().required('Please select a service'),
-  propertyType: yup.string().required('Please select property type'),
-  message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
-  urgency: yup.string().required('Please select urgency level')
-});
-
-type FormData = yup.InferType<typeof schema>;
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  propertyType: string;
+  message: string;
+  urgency: string;
+}
 
 const ContactPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -37,9 +32,7 @@ const ContactPage: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset
-  } = useForm<FormData>({
-    resolver: yupResolver(schema)
-  });
+  } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
