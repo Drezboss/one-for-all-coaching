@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Trophy } from "lucide-react";
+import { Menu, Leaf, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navigation() {
@@ -16,9 +16,8 @@ export function Navigation() {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "About Dave", href: "/about" },
-    { name: "1-2-1 Coaching", href: "/individual-coaching" },
-    { name: "Group Sessions", href: "/group-sessions" },
+    { name: "Services", href: "/services" },
+    { name: "Our Team", href: "/team" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -26,6 +25,7 @@ export function Navigation() {
   const homeSections = [
     { name: "Services", anchor: "services" },
     { name: "About", anchor: "about" },
+    { name: "Testimonials", anchor: "testimonials" },
   ];
 
   const isActive = (href: string) => {
@@ -53,9 +53,12 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
             <div className="text-2xl font-bold text-foreground">
-              <Trophy className="inline-block w-6 h-6 text-primary mr-2" />
-              ONE FOR ALL
-              <span className="block text-sm text-muted-foreground font-normal">COACHING</span>
+              <div className="flex items-center">
+                <Leaf className="inline-block w-6 h-6 text-green-600 mr-2" />
+                <Sparkles className="inline-block w-5 h-5 text-blue-600 mr-2" />
+              </div>
+              GREEN & CLEAN
+              <span className="block text-sm text-muted-foreground font-normal">GARDENING & CLEANING</span>
             </div>
           </Link>
 
@@ -92,13 +95,8 @@ export function Navigation() {
                 </div>
               )}
               <ThemeToggle />
-              <Link href="/login" onClick={() => handleLinkClick("/login")}>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
-                  Parent Login
-                </Button>
-              </Link>
-              <Link href="/contact" onClick={() => handleLinkClick("/contact")}>
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+              <Link href="/bookings" onClick={() => handleLinkClick("/bookings")}>
+                <Button className="bg-green-600 text-white hover:bg-green-700 font-semibold">
                   Book Now
                 </Button>
               </Link>
@@ -153,13 +151,8 @@ export function Navigation() {
                     <ThemeToggle />
                   </div>
                   
-                  <Link href="/login" onClick={() => handleLinkClick("/login")}>
-                    <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold w-full mb-2">
-                      Parent Login
-                    </Button>
-                  </Link>
-                  <Link href="/contact" onClick={() => handleLinkClick("/contact")}>
-                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold w-full">
+                  <Link href="/bookings" onClick={() => handleLinkClick("/bookings")}>
+                    <Button className="bg-green-600 text-white hover:bg-green-700 font-semibold w-full">
                       Book Now
                     </Button>
                   </Link>
