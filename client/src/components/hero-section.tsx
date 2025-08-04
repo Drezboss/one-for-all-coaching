@@ -5,43 +5,36 @@ import { siteContent } from "@shared/content";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-navy to-almost-black"></div>
-      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="absolute top-0 right-0 w-1/2 h-full">
-        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 opacity-50 overflow-hidden">
+    <section>
+      <div>
+        <div>
           <img 
             src="/attached_assets/Coach dave all weather coaching_1753424086964.jpg"
             alt="Dave Cornock - All Weather Professional Football Coach"
-            className="w-full h-full object-cover opacity-60"
           />
         </div>
       </div>
 
-      <div className="relative z-10 text-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <div className="text-sm text-lfc-red font-semibold tracking-wider uppercase mb-4">
+      <div>
+        <div>
+          <div>
             {siteContent.site.name.toUpperCase()}
           </div>
-          <h1 className="text-6xl md:text-8xl font-black text-white leading-none mb-6">
-            {siteContent.home.hero.title.split(' ').map((word, index) => 
-              word === 'POTENTIAL' ? 
-                <span key={index} className="text-lfc-red">{word}</span> : 
-                word + (index < siteContent.home.hero.title.split(' ').length - 1 ? ' ' : '')
-            )}
+          <h1>
+            {siteContent.home.hero.title}
           </h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2>
             {siteContent.site.tagline.toUpperCase()}
           </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
+          <p>
             {siteContent.home.hero.subtitle}
           </p>
-          <blockquote className="text-2xl md:text-3xl font-bold text-lfc-red mb-10 max-w-2xl italic">
+          <blockquote>
             "{siteContent.coach.quote}"
           </blockquote>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div>
             <Link href="/individual-coaching">
-              <Button className="btn-primary bg-lfc-red text-white hover:bg-bright-red font-bold text-lg px-8 py-4 transition-all duration-200">
+              <Button>
                 {siteContent.home.hero.primaryButton}
               </Button>
             </Link>
@@ -49,12 +42,15 @@ export function HeroSection() {
               onClick={() => {
                 const element = document.getElementById('services');
                 if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
                 }
               }}
-              className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-lg px-8 py-4 transition-all duration-200 rounded-md"
             >
               {siteContent.home.hero.secondaryButton}
+              <Rocket />
             </button>
           </div>
         </div>
