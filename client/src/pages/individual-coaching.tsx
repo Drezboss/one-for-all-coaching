@@ -1,32 +1,163 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Target, Video, TrendingUp, Brain, Clock, MapPin, CheckCircle, Star } from "lucide-react";
+import { Target, Video, TrendingUp, Brain, Clock, MapPin, CheckCircle, Star, Calendar, User, Users, Award } from "lucide-react";
+import { siteContent } from "@shared/content";
 
-export default function IndividualCoaching() {
-  const features = [
-    {
-      icon: Target,
-      title: "Personalised Training Plans",
-      description: "Every session is designed around your position, playing style, and specific goals. No generic programs here.",
-    },
-    {
-      icon: Video,
-      title: "Video Analysis & Feedback",
-      description: "Professional video review of your technique and tactical decisions, with detailed feedback for improvement.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Progress Tracking",
-      description: "Detailed monitoring of your development with regular assessments and milestone celebrations.",
-    },
-    {
-      icon: Brain,
-      title: "Mental Conditioning",
-      description: "Building confidence, focus, and decision-making skills that are crucial for peak performance.",
-    },
-  ];
+// Sticky CTA Header (reused)
+function StickyCTAHeader() {
+  return (
+    <div className="fixed top-0 right-4 z-50 bg-yellow-400 text-black px-4 py-3 rounded-b-lg shadow-lg hover:bg-yellow-300 transition-colors cursor-pointer">
+      <Link href="/contact">
+        <div className="text-center">
+          <div className="flex items-center justify-center mb-1">
+            <Calendar className="w-4 h-4 mr-1" />
+            <span className="font-bold text-sm">Book a</span>
+          </div>
+          <div className="font-bold text-sm">Session</div>
+          <div className="text-xs text-gray-700 mt-1">Always available</div>
+        </div>
+      </Link>
+    </div>
+  );
+}
 
+// Hero Section
+function IndividualCoachingHero() {
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="flex items-center gap-2 mb-8">
+              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm font-bold">⚽</span>
+              </div>
+              <span className="text-gray-600 font-medium">One For All Coaching</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl font-bold text-black mb-8 leading-tight">
+              💪 1-2-1 Individual Program Learning
+            </h1>
+            
+            <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+              {siteContent.services.individualCoaching.subtitle}
+            </h2>
+            
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              {siteContent.services.individualCoaching.description}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/contact">
+                <Button className="bg-gray-900 text-white hover:bg-gray-800 px-8 py-4 text-lg">
+                  Book a Session
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg">
+                  Meet Your Coach
+                </Button>
+              </Link>
+            </div>
+          </div>
+          
+          <div className="w-full h-96 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+            {siteContent.images.coaching.individual ? (
+              <img 
+                src={siteContent.images.coaching.individual}
+                alt="Individual Football Coaching"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <User className="w-24 h-24 text-gray-400" />
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Features Section
+function FeaturesSection() {
+  const features = siteContent.services.individualCoaching.features;
+  const featureIcons = [Target, Video, TrendingUp, Brain];
+
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">⚽</span>
+            </div>
+            <span className="text-gray-600 font-medium">One For All Coaching</span>
+          </div>
+          <h2 className="text-4xl font-bold text-black mb-4">What's Included</h2>
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+            Comprehensive individual coaching designed to unlock your potential
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => {
+            const Icon = featureIcons[index] || CheckCircle;
+            return (
+              <Card key={index} className="bg-white border border-gray-200 hover:shadow-lg transition-shadow">
+                <CardContent className="p-6 text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-gray-600" />
+                  </div>
+                  <h3 className="font-semibold text-black mb-2">{feature}</h3>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Who It's For Section
+function WhoItsForSection() {
+  const whoItsFor = siteContent.services.individualCoaching.whoItsFor;
+
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-black mb-4">Who It's For</h2>
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+            Individual coaching is perfect for players who want dedicated, personalized attention
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {whoItsFor.map((item, index) => {
+            const icons = [Award, Target, Brain];
+            const Icon = icons[index];
+            return (
+              <Card key={index} className="bg-gray-50 border border-gray-200 hover:shadow-lg transition-shadow">
+                <CardContent className="p-8">
+                  <div className="w-20 h-20 bg-white rounded-lg mx-auto mb-6 flex items-center justify-center">
+                    <Icon className="w-10 h-10 text-gray-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-black mb-4 text-center">{item.title}</h3>
+                  <p className="text-gray-700 leading-relaxed text-center">{item.description}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Session Structure Section
+function SessionStructureSection() {
   const sessionStructure = [
     {
       phase: "Warm-up & Assessment",
@@ -49,302 +180,155 @@ export default function IndividualCoaching() {
       description: "Football-specific fitness work integrated with ball skills",
     },
     {
-      phase: "Cool-down & Review",
+      phase: "Cool Down & Review",
       duration: "5 minutes",
-      description: "Session recap with immediate feedback and next steps",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Sarah M.",
-      age: "Parent of 14-year-old midfielder",
-      text: "The improvement in my daughter's confidence and technical ability has been incredible. Dave's individual approach really works.",
-    },
-    {
-      name: "James T.",
-      age: "16-year-old striker",
-      text: "The video analysis sessions are game-changers. Seeing my mistakes and improvements clearly has accelerated my development.",
-    },
-    {
-      name: "Mark L.",
-      age: "Parent of 12-year-old defender",
-      text: "Professional, reliable, and results-driven. My son looks forward to every session and the progress is obvious.",
+      description: "Session recap with feedback and planning for next steps",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-black via-dark-navy to-almost-black">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div className="absolute top-0 right-0 w-1/2 h-full">
-          <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 opacity-50 overflow-hidden">
-            <img 
-              src="/attached_assets/Dave with player swindown town_1753424086965.jpg"
-              alt="Dave Cornock - Individual Football Coaching with Player"
-              className="w-full h-full object-cover opacity-60"
-            />
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-black mb-4">Session Structure</h2>
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+            Every 90-minute session is structured to maximize your development
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {sessionStructure.map((session, index) => (
+            <Card key={index} className="bg-white border border-gray-200">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gray-900 text-white rounded-lg flex items-center justify-center font-bold">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-black">{session.phase}</h3>
+                      <div className="flex items-center text-gray-600 mt-1">
+                        <Clock className="w-4 h-4 mr-1" />
+                        <span className="text-sm">{session.duration}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="md:ml-8 flex-1">
+                    <p className="text-gray-700">{session.description}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Pricing Section
+function PricingSection() {
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">⚽</span>
           </div>
+          <span className="text-gray-600 font-medium">One For All Coaching</span>
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="text-sm text-lfc-red font-semibold tracking-wider uppercase mb-4">
-              INDIVIDUAL COACHING
+        <h2 className="text-4xl font-bold text-black mb-8">Ready to Get Started?</h2>
+        
+        <Card className="bg-gray-50 border border-gray-200 max-w-lg mx-auto">
+          <CardContent className="p-8">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-black mb-2">Individual Coaching</h3>
+              <p className="text-gray-600">90-minute personalized sessions</p>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black text-white leading-none mb-6">
-              💪 1-2-1 INDIVIDUAL
-              <br />
-              <span className="text-lfc-red">PROGRAM LEARNING</span>
-            </h1>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Personalised Coaching. Real Progress.
-            </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-2xl">
-              Led by a UEFA B License coach, our 1-2-1 sessions are built around you — your position, your goals, your pace.
-            </p>
-            <p className="text-lg text-lfc-red italic mb-8 max-w-2xl">
-              Become the best version of yourself — one session at a time.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact">
-                <Button className="btn-primary bg-lfc-red text-white hover:bg-bright-red font-bold text-lg px-8 py-4 transition-all duration-200">
-                  Book Your Session
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What's Included Section */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              WHAT'S <span className="text-lfc-red">INCLUDED</span>
-            </h2>
-            <p className="text-xl text-gray-300">Every 1-2-1 session is packed with value</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="bg-black border-gray-800 hover:border-lfc-red transition-colors duration-200">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-lfc-red rounded-lg flex items-center justify-center mr-4">
-                      <feature.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white">{feature.title}</h3>
-                  </div>
-                  <p className="text-gray-300 text-lg">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Session Structure */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              SESSION <span className="text-lfc-red">STRUCTURE</span>
-            </h2>
-            <p className="text-xl text-gray-300">90 minutes of focused, professional development</p>
-          </div>
-
-          <div className="space-y-6">
-            {sessionStructure.map((phase, index) => (
-              <Card key={index} className="bg-almost-black border-gray-800">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 bg-lfc-red rounded-full flex items-center justify-center mr-4">
-                        <span className="text-white font-bold">{index + 1}</span>
-                      </div>
-                      <h3 className="text-xl font-bold text-white">{phase.phase}</h3>
-                    </div>
-                    <div className="flex items-center text-lfc-red">
-                      <Clock className="w-5 h-5 mr-2" />
-                      <span className="font-semibold">{phase.duration}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-300 ml-12">{phase.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <div className="bg-almost-black p-8 rounded-lg border border-gray-800">
-              <h3 className="text-2xl font-bold text-white mb-4">Session Details</h3>
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div>
-                  <Clock className="w-8 h-8 text-lfc-red mx-auto mb-2" />
-                  <div className="text-white font-semibold">Duration</div>
-                  <div className="text-gray-300">90 minutes</div>
-                </div>
-                <div>
-                  <MapPin className="w-8 h-8 text-lfc-red mx-auto mb-2" />
-                  <div className="text-white font-semibold">Location</div>
-                  <div className="text-gray-300">Professional facilities</div>
-                </div>
-                <div>
-                  <Target className="w-8 h-8 text-lfc-red mx-auto mb-2" />
-                  <div className="text-white font-semibold">Focus</div>
-                  <div className="text-gray-300">100% personalised</div>
-                </div>
+            
+            <div className="space-y-4 mb-8">
+              <div className="flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                <span className="text-gray-700">Personalized training plan</span>
+              </div>
+              <div className="flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                <span className="text-gray-700">Video analysis included</span>
+              </div>
+              <div className="flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                <span className="text-gray-700">Progress tracking</span>
+              </div>
+              <div className="flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                <span className="text-gray-700">Mental conditioning</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Who It's For */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              WHO IT'S <span className="text-lfc-red">FOR</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-lfc-red rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Target className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Ambitious Players</h3>
-                <p className="text-gray-300 mb-6">Players looking to take their game to the next level with professional-standard training and personalized development.</p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Technical refinement</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Tactical understanding</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Mental preparation</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-lfc-red rounded-full flex items-center justify-center mx-auto mb-6">
-                  <TrendingUp className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Skill Development</h3>
-                <p className="text-gray-300 mb-6">Players wanting to improve specific aspects of their game or overcome particular challenges in their development.</p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Position-specific training</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Weakness elimination</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Strength maximization</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 bg-lfc-red rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Brain className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-4">Confidence Building</h3>
-                <p className="text-gray-300 mb-6">Players who need to build confidence, overcome setbacks, or develop a winning mindset both on and off the pitch.</p>
-                <div className="space-y-2">
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Mental resilience</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Self-belief building</span>
-                  </div>
-                  <div className="flex items-center text-gray-200">
-                    <CheckCircle className="w-4 h-4 text-lfc-red mr-2" />
-                    <span className="text-sm">Performance mindset</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              WHAT PLAYERS <span className="text-lfc-red">SAY</span>
-            </h2>
-            <p className="text-xl text-gray-300">Real results from real players and families</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-almost-black border-gray-800">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-lfc-red fill-current" />
-                    ))}
-                  </div>
-                  <blockquote className="text-gray-200 mb-6 italic">"{testimonial.text}"</blockquote>
-                  <div>
-                    <div className="text-white font-semibold">{testimonial.name}</div>
-                    <div className="text-gray-400 text-sm">{testimonial.age}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-lfc-red">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-            READY TO UNLOCK YOUR POTENTIAL?
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Join the growing number of players who are transforming their game with professional 1-2-1 coaching.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
             <Link href="/contact">
-              <Button className="bg-white text-black hover:bg-gray-100 font-bold text-lg px-8 py-4 transition-all duration-200">
-                Book Your First Session
+              <Button className="w-full bg-gray-900 text-white hover:bg-gray-800 py-4 text-lg">
+                Book Your Session
               </Button>
             </Link>
-            <Link href="/group-sessions">
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black font-bold text-lg px-8 py-4 transition-all duration-200"
-              >
-                View Group Sessions
-              </Button>
-            </Link>
+          </CardContent>
+        </Card>
+        
+        <p className="text-gray-600 mt-6">
+          Contact us for pricing and availability
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// CTA Section
+function CTASection() {
+  return (
+    <section className="py-20 bg-gray-900 text-white">
+      <div className="max-w-4xl mx-auto px-4 text-center">
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">⚽</span>
           </div>
+          <span className="text-gray-300 font-medium">One For All Coaching</span>
         </div>
-      </section>
+        
+        <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+          Take Your Game to the Next Level
+        </h2>
+        
+        <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          Ready to unlock your potential with professional, personalized coaching?
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/contact">
+            <Button className="bg-white text-black hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+              Book a Session
+            </Button>
+          </Link>
+          <Link href="/group-sessions">
+            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg font-semibold">
+              View Group Sessions
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function IndividualCoaching() {
+  return (
+    <div className="min-h-screen bg-white">
+      <StickyCTAHeader />
+      <IndividualCoachingHero />
+      <FeaturesSection />
+      <WhoItsForSection />
+      <SessionStructureSection />
+      <PricingSection />
+      <CTASection />
     </div>
   );
 }
