@@ -1,63 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Rocket } from "lucide-react";
-import { siteContent } from "@shared/content";
+import { Trophy } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-dark-navy to-almost-black"></div>
-      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-      <div className="absolute top-0 right-0 w-1/2 h-full">
-        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 opacity-50 overflow-hidden">
-          <img 
-            src="/attached_assets/Coach dave all weather coaching_1753424086964.jpg"
-            alt="Dave Cornock - All Weather Professional Football Coach"
-            className="w-full h-full object-cover opacity-60"
-          />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-50">
+      <div className="relative z-10 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-4">
+            <Trophy className="w-16 h-16 mx-auto text-gray-600 mb-4" />
+            <p className="text-sm font-semibold tracking-wider uppercase text-gray-600">
+              ONE FOR ALL Coaching
+            </p>
+          </div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-black leading-tight mb-8">
+            Helping You<br />
+            Become the Best<br />
+            Version of<br />
+            Yourself
+          </h1>
+          <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+            Welcome to One For All Coaching—where personal growth meets professional standards.
+          </p>
+          <p className="text-lg text-gray-700 mb-12 max-w-3xl mx-auto">
+            We offer tailored training and development for players and coaches, built around one simple principle: your journey is unique, and your development should be too.
+          </p>
+          <Link href="/contact">
+            <Button className="bg-gray-800 text-white hover:bg-gray-900 font-semibold text-lg px-8 py-6 h-auto rounded-full transition-all duration-200">
+              Contact Us
+            </Button>
+          </Link>
         </div>
       </div>
-
-      <div className="relative z-10 text-left max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <div className="text-sm text-lfc-red font-semibold tracking-wider uppercase mb-4">
-            {siteContent.site.name.toUpperCase()}
-          </div>
-          <h1 className="text-6xl md:text-8xl font-black text-white leading-none mb-6">
-            {siteContent.home.hero.title.split(' ').map((word, index) => 
-              word === 'POTENTIAL' ? 
-                <span key={index} className="text-lfc-red">{word}</span> : 
-                word + (index < siteContent.home.hero.title.split(' ').length - 1 ? ' ' : '')
-            )}
-          </h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            {siteContent.site.tagline.toUpperCase()}
-          </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
-            {siteContent.home.hero.subtitle}
-          </p>
-          <blockquote className="text-2xl md:text-3xl font-bold text-lfc-red mb-10 max-w-2xl italic">
-            "{siteContent.coach.quote}"
-          </blockquote>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/individual-coaching">
-              <Button className="btn-primary bg-lfc-red text-white hover:bg-bright-red font-bold text-lg px-8 py-4 transition-all duration-200">
-                {siteContent.home.hero.primaryButton}
-              </Button>
-            </Link>
-            <button
-              onClick={() => {
-                const element = document.getElementById('services');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-              className="border-2 border-white text-white hover:bg-white hover:text-black font-bold text-lg px-8 py-4 transition-all duration-200 rounded-md"
-            >
-              {siteContent.home.hero.secondaryButton}
-            </button>
-          </div>
-        </div>
+      
+      {/* Background shape/image placeholder */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 opacity-10">
+        <div className="w-full h-full bg-gray-400 rounded-full"></div>
       </div>
     </section>
   );
