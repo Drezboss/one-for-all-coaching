@@ -8,6 +8,7 @@ import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
 import About from "@/pages/about";
+import Services from "@/pages/services";
 import IndividualCoaching from "@/pages/individual-coaching";
 import GroupSessions from "@/pages/group-sessions";
 import Contact from "@/pages/contact";
@@ -23,6 +24,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
+      <Route path="/services" component={Services} />
       <Route path="/individual-coaching" component={IndividualCoaching} />
       <Route path="/group-sessions" component={GroupSessions} />
       <Route path="/contact" component={Contact} />

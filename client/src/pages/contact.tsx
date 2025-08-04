@@ -1,557 +1,243 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { Card, CardContent } from "@/components/ui/card";
+import { ContentCard, ImagePlaceholder } from "@/components/ui/content-card";
+import { StickyNote } from "@/components/ui/sticky-note";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertContactSchema, insertBookingSchema } from "@shared/schema";
-import { z } from "zod";
-import { Mail, Phone, MapPin, Clock, Calendar, User, MessageSquare } from "lucide-react";
-
-const contactFormSchema = insertContactSchema.extend({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-const bookingFormSchema = insertBookingSchema.extend({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  phone: z.string().optional(),
-  serviceType: z.string().min(1, "Please select a service"),
-  preferredDate: z.string().optional(),
-  message: z.string().optional(),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
-type BookingFormData = z.infer<typeof bookingFormSchema>;
+import { Label } from "@/components/ui/label";
+import { Mountain, Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { siteContent } from "@shared/content";
 
 export default function Contact() {
-  const [activeTab, setActiveTab] = useState("contact");
-  const { toast } = useToast();
-
-  const contactForm = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      service: "",
-      message: "",
-    },
-  });
-
-  const bookingForm = useForm<BookingFormData>({
-    resolver: zodResolver(bookingFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      serviceType: "",
-      preferredDate: "",
-      message: "",
-    },
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      // Static site - no backend API calls
-      console.log("Contact form submission:", data);
-      await new Promise(resolve => setTimeout(resolve, 800));
-      return { success: true };
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message Received!",
-        description: "Thank you for your interest. Please call us directly at +44 7750 887112 for immediate assistance.",
-      });
-      contactForm.reset();
-    },
-    onError: () => {
-      toast({
-        title: "Please Contact Us Directly",
-        description: "Call +44 7750 887112 or email dave@all-4one-coaching.com",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const bookingMutation = useMutation({
-    mutationFn: async (data: BookingFormData) => {
-      // Static site - no backend API calls
-      console.log("Booking form submission:", data);
-      await new Promise(resolve => setTimeout(resolve, 800));
-      return { success: true };
-    },
-    onSuccess: () => {
-      toast({
-        title: "Booking Interest Noted!",
-        description: "Please call us at +44 7750 887112 to discuss availability and book your session.",
-      });
-      bookingForm.reset();
-    },
-    onError: () => {
-      toast({
-        title: "Please Contact Us Directly",
-        description: "Call +44 7750 887112 or email dave@all-4one-coaching.com",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onContactSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
-  };
-
-  const onBookingSubmit = (data: BookingFormData) => {
-    bookingMutation.mutate(data);
-  };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "info@oneforallcoaching.com",
-      description: "Get in touch via email",
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+123-456-7890",
-      description: "Call us directly",
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "Gloucestershire",
-      description: "Available Online & In Person",
-    },
-    {
-      icon: Clock,
-      title: "Response Time",
-      value: "Within 24 hours",
-      description: "We'll get back to you quickly",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-black via-dark-navy to-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
-            📞 <span className="text-lfc-red">CONTACT</span> US
-          </h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Let's Build Your Next Step Together.
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Ready to unlock your potential? Get in touch and let's discuss how we can help you become the best version of yourself.
-          </p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Section */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <blockquote className="text-2xl italic text-gray-200 mb-4">
-              "Your journey is unique. Your development should be too."
-            </blockquote>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Let's Build Your Next Step Together
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ready to start your football journey? Get in touch and let's discuss how we can help you reach your goals.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Contact Info Cards */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {contactInfo.map((info, index) => (
-              <Card key={index} className="bg-black border-gray-800 hover:border-lfc-red transition-colors duration-200">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-lfc-red rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <info.icon className="w-6 h-6 text-white" />
+      {/* Main Content Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Contact Form Card */}
+          <div className="lg:col-span-1 relative">
+            <StickyNote>
+              Get in touch - We'll respond within 24 hours
+            </StickyNote>
+            
+            <ContentCard title="Send Us a Message">
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">
+                      First Name
+                    </Label>
+                    <Input
+                      id="firstName"
+                      type="text"
+                      placeholder="Your first name"
+                      className="mt-1"
+                    />
                   </div>
-                  <h3 className="text-white font-semibold mb-2">{info.title}</h3>
-                  <div className="text-lfc-red font-bold mb-1">{info.value}</div>
-                  <div className="text-gray-400 text-sm">{info.description}</div>
-                </CardContent>
-              </Card>
-            ))}
+                  <div>
+                    <Label htmlFor="lastName" className="text-sm font-medium text-gray-700">
+                      Last Name
+                    </Label>
+                    <Input
+                      id="lastName"
+                      type="text"
+                      placeholder="Your last name"
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                    Email Address
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your.email@example.com"
+                    className="mt-1"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                    Phone Number
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+44 7123 456789"
+                    className="mt-1"
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="service" className="text-sm font-medium text-gray-700">
+                    Service Interest
+                  </Label>
+                  <select
+                    id="service"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-500 focus:border-gray-500"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="individual">1-2-1 Individual Coaching</option>
+                    <option value="group">Group Sessions</option>
+                    <option value="mentorship">Coach Mentorship</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <Label htmlFor="message" className="text-sm font-medium text-gray-700">
+                    Message
+                  </Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Tell us about your goals and how we can help..."
+                    rows={4}
+                    className="mt-1"
+                  />
+                </div>
+                
+                <Button className="w-full bg-gray-800 text-white hover:bg-gray-700 font-semibold py-3">
+                  <Send className="w-4 h-4 mr-2" />
+                  Send Message
+                </Button>
+              </form>
+            </ContentCard>
           </div>
-        </div>
-      </section>
 
-      {/* Contact Forms */}
-      <section className="py-20 bg-black">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Contact Information Card */}
+          <ContentCard title="Get in Touch">
+            <ImagePlaceholder icon={<Mountain className="w-12 h-12 text-gray-400" />} />
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">Email</h4>
+                  <p className="text-sm text-gray-600">Info@oneforcoaching.com</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <Phone className="w-5 h-5 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">Phone</h4>
+                  <p className="text-sm text-gray-600">+44 7750 887112</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">Location</h4>
+                  <p className="text-sm text-gray-600">Based in [Your City] — Available Online & In Person</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm">Availability</h4>
+                  <p className="text-sm text-gray-600">Monday - Sunday, 8 AM - 8 PM</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 p-4 rounded-lg mt-6">
+              <h4 className="font-semibold text-gray-900 text-sm mb-2">Response Time</h4>
+              <p className="text-xs text-gray-600">
+                We typically respond to all inquiries within 24 hours. For urgent matters, 
+                please call us directly.
+              </p>
+            </div>
+          </ContentCard>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-16">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              GET IN <span className="text-lfc-red">TOUCH</span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-300">Choose how you'd like to connect with us</p>
+            <p className="text-gray-600">
+              Common questions about our coaching services
+            </p>
           </div>
-
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-almost-black border border-gray-800">
-              <TabsTrigger 
-                value="contact" 
-                className="data-[state=active]:bg-lfc-red data-[state=active]:text-white text-gray-300"
-              >
-                <MessageSquare className="w-4 h-4 mr-2" />
-                General Inquiry
-              </TabsTrigger>
-              <TabsTrigger 
-                value="booking" 
-                className="data-[state=active]:bg-lfc-red data-[state=active]:text-white text-gray-300"
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                Book Session
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="contact" className="mt-8">
-              <Card className="bg-almost-black border-gray-800">
-                <CardContent className="p-8">
-                  <div className="mb-6" id="contact-form">
-                    <h3 className="text-2xl font-bold text-white mb-2">Send us a Message</h3>
-                    <p className="text-gray-300">Have questions about our services? Want to learn more about our coaching approach? Drop us a message and we'll get back to you.</p>
-                  </div>
-
-                  <Form {...contactForm}>
-                    <form onSubmit={contactForm.handleSubmit(onContactSubmit)} className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <FormField
-                          control={contactForm.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Full Name</FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  placeholder="Enter your full name"
-                                  className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={contactForm.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Email Address</FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  type="email"
-                                  placeholder="Enter your email"
-                                  className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <FormField
-                        control={contactForm.control}
-                        name="service"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white font-semibold">Service Interest (Optional)</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
-                              <FormControl>
-                                <SelectTrigger className="bg-black border-gray-700 text-white focus:border-lfc-red">
-                                  <SelectValue placeholder="Select a service" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent className="bg-black border-gray-700">
-                                <SelectItem value="individual">1-2-1 Individual Coaching</SelectItem>
-                                <SelectItem value="group">Group Sessions</SelectItem>
-                                <SelectItem value="education">Coach Education</SelectItem>
-                                <SelectItem value="mentorship">Coach Mentorship</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={contactForm.control}
-                        name="message"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white font-semibold">Message</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                {...field}
-                                rows={5}
-                                placeholder="Tell us about your goals and how we can help..."
-                                className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <Button
-                        type="submit"
-                        disabled={contactMutation.isPending}
-                        className="btn-primary w-full bg-lfc-red text-white hover:bg-bright-red font-bold text-lg py-4 transition-all duration-200"
-                      >
-                        {contactMutation.isPending ? "Sending..." : "Send Message"}
-                      </Button>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="booking" className="mt-8">
-              <Card className="bg-almost-black border-gray-800">
-                <CardContent className="p-8">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">Book a Session</h3>
-                    <p className="text-gray-300">Ready to start your development journey? Fill out this form and we'll contact you within 24 hours to schedule your session.</p>
-                  </div>
-
-                  <Form {...bookingForm}>
-                    <form onSubmit={bookingForm.handleSubmit(onBookingSubmit)} className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <FormField
-                          control={bookingForm.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Full Name</FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  placeholder="Enter your full name"
-                                  className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={bookingForm.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Email Address</FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  type="email"
-                                  placeholder="Enter your email"
-                                  className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <FormField
-                          control={bookingForm.control}
-                          name="phone"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Phone Number (Optional)</FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  placeholder="Enter your phone number"
-                                  className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={bookingForm.control}
-                          name="serviceType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white font-semibold">Service Type</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger className="bg-black border-gray-700 text-white focus:border-lfc-red">
-                                    <SelectValue placeholder="Select service type" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent className="bg-black border-gray-700">
-                                  <SelectItem value="individual">1-2-1 Individual Coaching</SelectItem>
-                                  <SelectItem value="group">Group Sessions</SelectItem>
-                                  <SelectItem value="mentorship">Coach Mentorship</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <FormField
-                        control={bookingForm.control}
-                        name="preferredDate"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white font-semibold">Preferred Date/Time (Optional)</FormLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                placeholder="e.g., Weekday evenings, Saturday mornings"
-                                className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={bookingForm.control}
-                        name="message"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white font-semibold">Additional Information (Optional)</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                {...field}
-                                rows={4}
-                                placeholder="Tell us about your current level, goals, or any specific requirements..."
-                                className="bg-black border-gray-700 text-white focus:border-lfc-red"
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <Button
-                        type="submit"
-                        disabled={bookingMutation.isPending}
-                        className="btn-primary w-full bg-lfc-red text-white hover:bg-bright-red font-bold text-lg py-4 transition-all duration-200"
-                      >
-                        {bookingMutation.isPending ? "Submitting..." : "Submit Booking Inquiry"}
-                      </Button>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Additional Info */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <Card className="bg-black border-gray-800">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">What Happens Next?</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-lfc-red rounded-full flex items-center justify-center mr-4 mt-1">
-                      <span className="text-white font-bold text-sm">1</span>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1">We'll Contact You</h4>
-                      <p className="text-gray-300 text-sm">Within 24 hours, we'll reach out to discuss your goals and answer any questions.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-lfc-red rounded-full flex items-center justify-center mr-4 mt-1">
-                      <span className="text-white font-bold text-sm">2</span>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1">Schedule Your Session</h4>
-                      <p className="text-gray-300 text-sm">We'll find a time that works for you and book your first session.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-lfc-red rounded-full flex items-center justify-center mr-4 mt-1">
-                      <span className="text-white font-bold text-sm">3</span>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1">Start Your Journey</h4>
-                      <p className="text-gray-300 text-sm">Begin your personalized development program with professional coaching.</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-black border-gray-800">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">How quickly can I start?</h4>
-                    <p className="text-gray-300 text-sm">Most new clients can start within a week of their initial inquiry, depending on availability.</p>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">What equipment do I need?</h4>
-                    <p className="text-gray-300 text-sm">Just bring yourself! We provide all professional equipment and training materials.</p>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">Can parents observe sessions?</h4>
-                    <p className="text-gray-300 text-sm">Absolutely! Parents are welcome to observe and we encourage their involvement in the development process.</p>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">Do you offer trial sessions?</h4>
-                    <p className="text-gray-300 text-sm">Yes, we offer discounted trial sessions so you can experience our coaching approach firsthand.</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="font-bold text-gray-900 mb-3">What age groups do you coach?</h3>
+              <p className="text-sm text-gray-600">
+                I work with players of all ages, from young children just starting out to adults looking to improve their game. Each session is tailored to the individual's age and skill level.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="font-bold text-gray-900 mb-3">How long are the sessions?</h3>
+              <p className="text-sm text-gray-600">
+                Individual sessions are typically 60 minutes, while group sessions can vary from 60-90 minutes depending on the group size and objectives.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="font-bold text-gray-900 mb-3">Do you provide online coaching?</h3>
+              <p className="text-sm text-gray-600">
+                Yes! I offer both in-person and online coaching sessions. Online sessions include video analysis, virtual training plans, and regular check-ins.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <h3 className="font-bold text-gray-900 mb-3">What equipment do I need?</h3>
+              <p className="text-sm text-gray-600">
+                For in-person sessions, just bring appropriate sports clothing and footwear. For online sessions, a smartphone or computer with camera access is sufficient.
+              </p>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-lfc-red">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-            YOUR DEVELOPMENT STARTS HERE
+        {/* CTA Section */}
+        <div className="mt-16 bg-white rounded-xl shadow-lg p-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Ready to Start Your Football Journey?
           </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Don't wait to unlock your potential. The best time to start your football development journey is now.
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Don't wait to begin your development. Contact us today to schedule your first session 
+            and take the first step towards achieving your football goals.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              className="bg-white text-lfc-red hover:bg-gray-100 font-bold text-lg px-8 py-4"
-              onClick={() => setActiveTab("booking")}
-            >
-              Book Your Session Now
+            <Button className="bg-gray-800 text-white hover:bg-gray-700 font-semibold px-8 py-3">
+              Book Your First Session
             </Button>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-lfc-red font-bold text-lg px-8 py-4"
-              onClick={() => setActiveTab("contact")}
-            >
-              Ask a Question First
+            <Button className="bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold px-8 py-3">
+              View Our Services
             </Button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
