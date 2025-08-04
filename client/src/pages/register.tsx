@@ -411,10 +411,7 @@ export default function Register() {
                 </Button>
 
                 <div className="text-center text-gray-400">
-                  Already have an account?{" "}
-                  <Link href="/login" className="text-lfc-red hover:text-bright-red">
-                    Sign in here
-                  </Link>
+                  Account creation is currently disabled. Please contact support for assistance.
                 </div>
               </form>
             </Form>

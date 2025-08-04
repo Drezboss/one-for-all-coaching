@@ -92,11 +92,6 @@ export function Navigation() {
                 </div>
               )}
               <ThemeToggle />
-              <Link href="/login" onClick={() => handleLinkClick("/login")}>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
-                  Parent Login
-                </Button>
-              </Link>
               <Link href="/contact" onClick={() => handleLinkClick("/contact")}>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
                   Book Now
@@ -153,11 +148,6 @@ export function Navigation() {
                     <ThemeToggle />
                   </div>
                   
-                  <Link href="/login" onClick={() => handleLinkClick("/login")}>
-                    <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold w-full mb-2">
-                      Parent Login
-                    </Button>
-                  </Link>
                   <Link href="/contact" onClick={() => handleLinkClick("/contact")}>
                     <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold w-full">
                       Book Now

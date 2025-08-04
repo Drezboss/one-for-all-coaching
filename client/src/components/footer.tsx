@@ -17,7 +17,6 @@ export function Footer() {
   ];
 
   const parentLinks = [
-    { name: "Parent Login", href: "/login" },
     { name: "Create Account", href: "/register" },
   ];
 
@@ -111,10 +110,10 @@ export function Footer() {
               ))}
             </ul>
             <div className="mt-4 p-3 bg-almost-black rounded-lg border border-gray-700">
-              <p className="text-sm text-gray-400 mb-2">Already registered?</p>
-              <Link href="/login">
+              <p className="text-sm text-gray-400 mb-2">Need an account?</p>
+              <Link href="/register">
                 <Button variant="outline" className="w-full border-lfc-red text-lfc-red hover:bg-lfc-red hover:text-white text-sm">
-                  Access Parent Dashboard
+                  Create Account
                 </Button>
               </Link>
             </div>
