@@ -11,9 +11,7 @@ import About from "@/pages/about";
 import IndividualCoaching from "@/pages/individual-coaching";
 import GroupSessions from "@/pages/group-sessions";
 import Contact from "@/pages/contact";
-import Login from "@/pages/login";
 import Register from "@/pages/register";
-import Admin from "@/pages/admin";
 import Calendar from "@/pages/calendar";
 import ParentDashboard from "@/pages/parent-dashboard";
 import NotFound from "@/pages/not-found";
@@ -26,9 +24,7 @@ function Router() {
       <Route path="/individual-coaching" component={IndividualCoaching} />
       <Route path="/group-sessions" component={GroupSessions} />
       <Route path="/contact" component={Contact} />
-      <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route path="/admin" component={Admin} />
       <Route path="/calendar" component={Calendar} />
       <Route path="/parent-dashboard" component={ParentDashboard} />
       <Route component={NotFound} />

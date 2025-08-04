@@ -412,8 +412,8 @@ export default function Register() {
 
                 <div className="text-center text-gray-400">
                   Already have an account?{" "}
-                  <Link href="/login" className="text-lfc-red hover:text-bright-red">
-                    Sign in here
+                  <Link href="/parent-dashboard" className="text-lfc-red hover:text-bright-red">
+                    Access Parent Dashboard
                   </Link>
                 </div>
               </form>
