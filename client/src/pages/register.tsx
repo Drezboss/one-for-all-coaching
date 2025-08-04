@@ -410,12 +410,7 @@ export default function Register() {
                   {registerMutation.isPending ? "Creating Account..." : "Create Parent Account"}
                 </Button>
 
-                <div className="text-center text-gray-400">
-                  Already have an account?{" "}
-                  <Link href="/login" className="text-lfc-red hover:text-bright-red">
-                    Sign in here
-                  </Link>
-                </div>
+
               </form>
             </Form>
           </CardContent>

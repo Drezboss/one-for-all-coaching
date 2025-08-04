@@ -36,20 +36,20 @@ export default function ParentDashboard() {
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (!userData) {
-      setLocation("/login");
+      setLocation("/");
       return;
     }
     try {
       const parsedUser = JSON.parse(userData);
       if (parsedUser.role !== "parent") {
-        setLocation("/login");
+        setLocation("/");
         return;
       }
       setUser(parsedUser);
     } catch (error) {
       console.error("Invalid user data:", error);
       localStorage.removeItem("user");
-      setLocation("/login");
+      setLocation("/");
     }
   }, [setLocation]);
 
