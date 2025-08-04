@@ -1,292 +1,201 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { ContentCard, ImagePlaceholder } from "@/components/ui/content-card";
+import { StickyNote } from "@/components/ui/sticky-note";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { Medal, Trophy, Users, Target, CheckCircle, Star, Award } from "lucide-react";
+import { Mountain, Trophy, Award, Target, Users, Star } from "lucide-react";
+import { siteContent } from "@shared/content";
 
 export default function About() {
-  const credentials = [
-    "UEFA B License qualified",
-    "FA Level 2 Coaching Badge",
-    "Semi-professional playing experience",
-    "Grassroots to elite level coaching",
-    "DBS checked and safeguarding certified",
-    "First Aid qualified",
-  ];
-
-  const achievements = [
-    {
-      icon: Users,
-      title: "Player Development",
-      description: "Dedicated to helping players at all levels reach their potential through personalized coaching approaches",
-    },
-    {
-      icon: Star,
-      title: "Individual Focus",
-      description: "Every session is tailored to the specific needs and goals of each player",
-    },
-    {
-      icon: Award,
-      title: "UEFA B Licensed",
-      description: "Qualified with UEFA B License, bringing professional standards to every training session",
-    },
-    {
-      icon: Trophy,
-      title: "Grassroots Excellence",
-      description: "Passionate about developing football at the grassroots level across all age groups",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-black via-dark-navy to-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
-                MEET <span className="text-lfc-red">DAVE</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-8">
-                Your dedicated coach with the experience, qualifications, and passion to help you unlock your potential on and off the pitch.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button className="bg-lfc-red text-white hover:bg-bright-red font-bold text-lg px-8 py-4">
-                    Book a Session
-                  </Button>
-                </Link>
-                <Link href="/individual-coaching">
-                  <Button
-                    variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-black font-bold text-lg px-8 py-4"
-                  >
-                    View Services
-                  </Button>
-                </Link>
-              </div>
-            </div>
-            <div>
-              <div className="rounded-lg shadow-2xl w-full h-96 overflow-hidden">
-                <img 
-                  src="/attached_assets/In the dugouts_1753424086963.jpg"
-                  alt="Dave Cornock - UEFA B Licensed Football Coach in Professional Setting"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Section */}
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Meet Dave Cornock
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Your dedicated coach with the experience, qualifications, and passion to help you unlock your potential on and off the pitch.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Credentials Section */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              PROFESSIONAL <span className="text-lfc-red">CREDENTIALS</span>
-            </h2>
-            <p className="text-xl text-gray-300">Qualified, experienced, and committed to excellence</p>
+      {/* Main Content Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Profile Card */}
+          <div className="lg:col-span-1 relative">
+            <StickyNote>
+              UEFA B Licensed Coach - Professional Experience
+            </StickyNote>
+            
+            <ContentCard title="About Me">
+              <ImagePlaceholder icon={<Mountain className="w-12 h-12 text-gray-400" />} />
+              <h3 className="text-lg font-bold text-gray-900">Dave Cornock</h3>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                I'm Dava Cornnock, a UEFA B Licensed football coach with a broad coaching background 
+                that spans all levels of the game. My journey has taken me from grassroots football, 
+                and local leagues, through the Junior Premier League (JPL) and Hellenic League, 
+                coaching staff at 2 women's university teams and UDA overseas students.
+              </p>
+            </ContentCard>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {credentials.map((credential, index) => (
-              <Card key={index} className="bg-black border-gray-800 hover:border-lfc-red transition-colors duration-200">
-                <CardContent className="p-6 flex items-center">
-                  <CheckCircle className="w-6 h-6 text-lfc-red mr-4 flex-shrink-0" />
-                  <span className="text-white font-medium">{credential}</span>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-                ABOUT ME – <span className="text-lfc-red">DAVE CORNOCK</span>
-              </h2>
-              <p className="text-lg text-gray-300 mb-6">
-                I'm Dave Cornock, a UEFA B Licensed football coach with a broad coaching background that spans all levels of the game. My journey has taken me from grassroots football and local leagues, through the Junior Premier League (JPL) and Hellenic League, to coaching elite Tier 2 women's university teams and UDA overseas students.
-              </p>
-              <p className="text-lg text-gray-300 mb-8">
-                I'm passionate about helping players and coaches unlock their full potential. Whether it's delivering tailored 1-to-1 sessions, designing structured training plans, or mentoring coaches throughout a season, I'm here to support your growth and development.
-              </p>
-              <p className="text-lg text-lfc-red font-semibold mb-8">
-                Let's build a stronger, smarter game — together.
-              </p>
+          {/* Philosophy Card */}
+          <ContentCard title="My Philosophy">
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <Target className="w-4 h-4 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">Individual Focus</h4>
+                  <p className="text-xs text-gray-600">
+                    Every player is unique with their own strengths, challenges, and goals. Our approach is tailored to bring out the best in each individual.
+                  </p>
+                </div>
+              </div>
               
-              <div className="bg-almost-black p-6 rounded-lg border border-gray-800">
-                <blockquote className="text-xl italic text-gray-200 mb-4">
-                  "Your journey is unique. Your development should be too."
-                </blockquote>
-                <cite className="text-lfc-red font-semibold">— Dave, Head Coach</cite>
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <Trophy className="w-4 h-4 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">Technical Excellence</h4>
+                  <p className="text-xs text-gray-600">
+                    Building solid technical foundations while developing tactical understanding that will serve players throughout their football journey.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <Users className="w-4 h-4 text-gray-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 text-sm mb-1">Holistic Development</h4>
+                  <p className="text-xs text-gray-600">
+                    Football is a vehicle for personal growth. We focus on confidence, discipline, and life skills that extend beyond the pitch.
+                  </p>
+                </div>
               </div>
             </div>
-            <div>
-              <div className="rounded-lg shadow-2xl w-full h-96 overflow-hidden">
-                <img 
-                  src="/attached_assets/Coach dave on sidelines_1753424086964.jpg"
-                  alt="Dave Cornock - Professional Coaching from the Sidelines"
-                  className="w-full h-full object-cover"
-                />
+          </ContentCard>
+
+          {/* Credentials Card */}
+          <ContentCard title="Credentials & Experience">
+            <div className="space-y-3">
+              <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="flex items-center gap-2 mb-1">
+                  <Award className="w-4 h-4 text-gray-600" />
+                  <span className="font-semibold text-gray-900 text-sm">UEFA B License</span>
+                </div>
+                <p className="text-xs text-gray-600">Qualified with UEFA B License, bringing professional standards to every training session</p>
+              </div>
+              
+              <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="flex items-center gap-2 mb-1">
+                  <Star className="w-4 h-4 text-gray-600" />
+                  <span className="font-semibold text-gray-900 text-sm">FA Level 2 Coaching Badge</span>
+                </div>
+                <p className="text-xs text-gray-600">Certified by the Football Association with advanced coaching qualifications</p>
+              </div>
+              
+              <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy className="w-4 h-4 text-gray-600" />
+                  <span className="font-semibold text-gray-900 text-sm">Semi-professional Experience</span>
+                </div>
+                <p className="text-xs text-gray-600">Played at semi-professional level, bringing real game experience to coaching</p>
+              </div>
+              
+              <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="flex items-center gap-2 mb-1">
+                  <Users className="w-4 h-4 text-gray-600" />
+                  <span className="font-semibold text-gray-900 text-sm">DBS Checked & Safeguarding</span>
+                </div>
+                <p className="text-xs text-gray-600">Fully vetted and certified for working with young players</p>
               </div>
             </div>
-          </div>
+          </ContentCard>
         </div>
-      </section>
 
-      {/* Achievements Section */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              PROVEN <span className="text-lfc-red">RESULTS</span>
+        {/* Achievements Section */}
+        <div className="mt-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Coaching Achievements
             </h2>
-            <p className="text-xl text-gray-300">Track record of excellence in player development</p>
+            <p className="text-gray-600">
+              Dedicated to helping players at all levels reach their potential
+            </p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {achievements.map((achievement, index) => (
-              <Card key={index} className="bg-black border-gray-800 hover:border-lfc-red transition-colors duration-200">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-lfc-red rounded-lg flex items-center justify-center mr-4">
-                      <achievement.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white">{achievement.title}</h3>
-                  </div>
-                  <p className="text-gray-300 text-lg">{achievement.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy Section */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              COACHING <span className="text-lfc-red">PHILOSOPHY</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-almost-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <Target className="w-12 h-12 text-lfc-red mx-auto mb-6" />
-                <h3 className="text-xl font-bold text-white mb-4">Individual Focus</h3>
-                <p className="text-gray-300">Every player is unique with their own strengths, challenges, and goals. Our approach is tailored to bring out the best in each individual.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-almost-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <Medal className="w-12 h-12 text-lfc-red mx-auto mb-6" />
-                <h3 className="text-xl font-bold text-white mb-4">Technical Excellence</h3>
-                <p className="text-gray-300">Building solid technical foundations while developing tactical understanding that will serve players throughout their football journey.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-almost-black border-gray-800 text-center">
-              <CardContent className="p-8">
-                <Users className="w-12 h-12 text-lfc-red mx-auto mb-6" />
-                <h3 className="text-xl font-bold text-white mb-4">Holistic Development</h3>
-                <p className="text-gray-300">Football is a vehicle for personal growth. We focus on confidence, discipline, and life skills that extend beyond the pitch.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Coaching Gallery Section */}
-      <section className="py-20 bg-almost-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-              COACHING IN <span className="text-lfc-red">ACTION</span>
-            </h2>
-            <p className="text-xl text-gray-300">See Dave's professional coaching across all levels and age groups</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/Tiny titans sat with Coach Dave_1753424086965.jpg"
-                alt="Dave coaching young players - Tiny Titans session"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-6 h-6 text-gray-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Player Development</h3>
+              <p className="text-sm text-gray-600">
+                Dedicated to helping players at all levels reach their potential through personalized coaching approaches
+              </p>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/Tiny Titans with Caoch Dave_1753424086965.jpg"
-                alt="Dave with young player - individual attention"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
+            
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Target className="w-6 h-6 text-gray-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Individual Focus</h3>
+              <p className="text-sm text-gray-600">
+                Every session is tailored to the specific needs and goals of each player
+              </p>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/coach dave u7s_1753424086966.jpg"
-                alt="Dave coaching U7s outdoor session"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
+            
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-6 h-6 text-gray-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">UEFA B Licensed</h3>
+              <p className="text-sm text-gray-600">
+                Qualified with UEFA B License, bringing professional standards to every training session
+              </p>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/Tint Titan activity_1753424086964.jpg"
-                alt="Dave coaching indoor skills session"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/Always watching the players coach dave_1753424086966.jpg"
-                alt="Dave observing and analyzing player performance"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-2xl">
-              <img 
-                src="/attached_assets/Coach dave football party_1753424086967.jpg"
-                alt="Dave at community football event"
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-              />
+            
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="w-6 h-6 text-gray-600" />
+              </div>
+              <h3 className="font-bold text-gray-900 mb-2">Grassroots Excellence</h3>
+              <p className="text-sm text-gray-600">
+                Passionate about developing football at the grassroots level across all age groups
+              </p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-lfc-red">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-            READY TO START YOUR JOURNEY?
+        {/* CTA Section */}
+        <div className="mt-16 bg-white rounded-xl shadow-lg p-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Ready to Start Your Journey?
           </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Take the first step towards becoming the best version of yourself with professional coaching that makes a difference.
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Let's work together to unlock your potential and achieve your football goals. 
+            Whether you're just starting out or looking to take your game to the next level, 
+            I'm here to support your development every step of the way.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact">
-              <Button className="bg-white text-black hover:bg-gray-100 font-bold text-lg px-8 py-4 transition-all duration-200">
-                Book Your First Session
-              </Button>
-            </Link>
-            <Link href="/individual-coaching">
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black font-bold text-lg px-8 py-4 transition-all duration-200"
-              >
-                View Services
-              </Button>
-            </Link>
+            <Button className="bg-gray-800 text-white hover:bg-gray-700 font-semibold px-8 py-3">
+              Book a Session
+            </Button>
+            <Button className="bg-gray-200 text-gray-800 hover:bg-gray-300 font-semibold px-8 py-3">
+              Learn More
+            </Button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
