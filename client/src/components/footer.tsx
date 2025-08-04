@@ -17,7 +17,7 @@ export function Footer() {
   ];
 
   const parentLinks = [
-    { name: "Create Account", href: "/register" },
+    { name: "Q&A", href: "/qa" },
   ];
 
   return (
@@ -110,10 +110,10 @@ export function Footer() {
               ))}
             </ul>
             <div className="mt-4 p-3 bg-almost-black rounded-lg border border-gray-700">
-              <p className="text-sm text-gray-400 mb-2">Need an account?</p>
-              <Link href="/register">
+              <p className="text-sm text-gray-400 mb-2">Have questions?</p>
+              <Link href="/qa">
                 <Button variant="outline" className="w-full border-lfc-red text-lfc-red hover:bg-lfc-red hover:text-white text-sm">
-                  Create Account
+                  View Q&A
                 </Button>
               </Link>
             </div>

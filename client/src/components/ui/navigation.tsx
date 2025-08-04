@@ -19,6 +19,7 @@ export function Navigation() {
     { name: "About Dave", href: "/about" },
     { name: "1-2-1 Coaching", href: "/individual-coaching" },
     { name: "Group Sessions", href: "/group-sessions" },
+    { name: "Q&A", href: "/qa" },
     { name: "Contact", href: "/contact" },
   ];
 
